@@ -202,7 +202,7 @@ define openvpn::ca (
       }
 
       exec { "generate server cert ${name}":
-        command  => "./easyrsa build-server-full '${common_name}' nopass",
+        command  => "echo yes | ./easyrsa build-server-full '${common_name}' nopass",
         cwd      => "${server_directory}/${name}/easy-rsa",
         creates  => "${server_directory}/${name}/easy-rsa/keys/private/${common_name}.key",
         provider => 'shell',

@@ -12,21 +12,21 @@
 # This variable should point to
 # the top level of the easy-rsa
 # tree.
-export EASY_RSA="<%= $server_directory -%>/<%= $openvpn_server %>/easy-rsa"
+set_var EASY_RSA "<%= $server_directory -%>/<%= $openvpn_server %>/easy-rsa"
 
 #
 # This variable should point to
 # the requested executables
 #
-export EASYRSA_OPENSSL="openssl"
-export PKCS11TOOL="pkcs11-tool"
-export GREP="grep"
+set_var EASYRSA_OPENSSL "openssl"
+set_var PKCS11TOOL "pkcs11-tool"
+set_var GREP "grep"
 
 
 # This variable should point to
 # the openssl.cnf file included
 # with easy-rsa.
-export EASYRSA_SSL_CONF="$EASY_RSA/openssl-1.0.cnf"
+set_var EASYRSA_SSL_CONF "$EASY_RSA/openssl-easyrsa.cnf"
 
 # Edit this variable to point to
 # your soon-to-be-created key
@@ -36,21 +36,21 @@ export EASYRSA_SSL_CONF="$EASY_RSA/openssl-1.0.cnf"
 # a rm -rf on this directory
 # so make sure you define
 # it correctly!
-export EASYRSA_PKI="$EASY_RSA/keys"
+set_var EASYRSA_PKI "$EASY_RSA/keys"
 
 # Issue rm -rf warning
 echo NOTE: If you run ./clean-all, I will be doing a rm -rf on $EASYRSA_PKI
 
 # PKCS11 fixes
-export PKCS11_MODULE_PATH="dummy"
-export PKCS11_PIN="dummy"
+set_var PKCS11_MODULE_PATH "dummy"
+set_var PKCS11_PIN "dummy"
 
 # Increase this to 2048 if you
 # are paranoid.  This will slow
 # down TLS negotiation performance
 # as well as the one-time DH parms
 # generation process.
-export EASYRSA_KEY_SIZE=<%= $ssl_key_size %>
+set_var EASYRSA_KEY_SIZE <%= $ssl_key_size %>
 
 # The default crypto mode is rsa; ec can enable elliptic curve support.
 # Note that not all software supports ECC, so use care when enabling it.
@@ -59,51 +59,51 @@ export EASYRSA_KEY_SIZE=<%= $ssl_key_size %>
 #  * ec
 
 <% if $ssl_key_algo { -%>
-export EASYRSA_ALGO=<%= $ssl_key_algo %>
+set_var EASYRSA_ALGO <%= $ssl_key_algo %>
 <% } -%>
 # Define the named curve, used in ec mode only:
 
 <% if $ssl_key_curve { -%>
-export EASYRSA_CURVE=<%= $ssl_key_curve %>
+set_var EASYRSA_CURVE <%= $ssl_key_curve %>
 <% } -%>
 
 # In how many days should the root CA key expire?
-export EASYRSA_CA_EXPIRE=<%= $ca_expire %>
+set_var EASYRSA_CA_EXPIRE <%= $ca_expire %>
 
 # In how many days should certificates expire?
-export EASYRSA_CERT_EXPIRE=<%= $key_expire %>
+set_var EASYRSA_CERT_EXPIRE <%= $key_expire %>
 
-export EASYRSA_CRL_DAYS=<%= $crl_days %>
+set_var EASYRSA_CRL_DAYS <%= $crl_days %>
 
 # Cryptographic digest to use.
 # Do not change this default unless you understand the security implications.
 # Valid choices include: md5, sha1, sha256, sha224, sha384, sha512
 
-export EASYRSA_DIGEST=<%= $digest %>
+set_var EASYRSA_DIGEST <%= $digest %>
 
-export EASYRSA_DN="<%= $dn_mode %>"
+set_var EASYRSA_DN "<%= $dn_mode %>"
 
 # These are the default values for fields
 # which will be placed in the certificate.
 # Don't leave any of these fields blank.
 <% if $country { -%>
-export EASYRSA_REQ_COUNTRY="<%= $country %>"
+set_var EASYRSA_REQ_COUNTRY "<%= $country %>"
 <% } -%>
 <% if $province { -%>
-export EASYRSA_REQ_PROVINCE="<%= $province %>"
+set_var EASYRSA_REQ_PROVINCE "<%= $province %>"
 <% } -%>
 <% if $city { -%>
-export EASYRSA_REQ_CITY="<%= $city %>"
+set_var EASYRSA_REQ_CITY "<%= $city %>"
 <% } -%>
 <% if $organization { -%>
-export EASYRSA_REQ_ORG="<%= $organization %>"
+set_var EASYRSA_REQ_ORG "<%= $organization %>"
 <% } -%>
 <% if $email { -%>
-export EASYRSA_REQ_EMAIL="<%= $email %>"
+set_var EASYRSA_REQ_EMAIL "<%= $email %>"
 <% } -%>
 <% if $key_cn { -%>
-export EASYRSA_REQ_CN="<%= $key_cn %>"
+set_var EASYRSA_REQ_CN "<%= $key_cn %>"
 <% } -%>
 <% if $key_ou { -%>
-export EASYRSA_REQ_OU="<%= $key_ou %>"
+set_var EASYRSA_REQ_OU "<%= $key_ou %>"
 <% } -%>
